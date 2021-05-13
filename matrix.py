@@ -58,10 +58,12 @@ def dot(A,B):
 
 def determinant(matrix):
     det=0
-    if(len(matrix)>2 and len(matrix[0])>2):
+    if(len(matrix)==1 and len(matrix[0])==1):
+        det=matrix[0][0]
+    else:
         sign=1
         for i in range(0,len(matrix[0])):
-            sub_determinant=list()
+            sub_matrix=list()
             for j in range(1,len(matrix)):
                 temp=list()
                 for k in range(0,len(matrix[j])):
@@ -69,18 +71,38 @@ def determinant(matrix):
                         None
                     else:
                         temp.append(matrix[j][k])
-                sub_determinant.append(temp)
-            det=det+(sign*matrix[0][i]*determinant(sub_determinant))
-            sign=sign*-1             
-    else:
-        det=(matrix[0][0]*matrix[1][1])-(matrix[0][1]*matrix[1][0])
+                sub_matrix.append(temp)
+            det=det+(sign*matrix[0][i]*determinant(sub_matrix))
+            sign=sign*-1
     return det
 
-def adjoint(matrix):
-    adj_matrix=list()
+def transpose(matrix):
+    trns_matrix=list()
     for i in range(0,len(matrix[0])):
         temp=list()
         for j in range(0,len(matrix)):
             temp.append(matrix[j][i])
-        adj_matrix.append(temp)
-    return adj_matrix
+        trns_matrix.append(temp)
+    return trns_matrix
+
+def adjoint(matrix):
+    adj_matrix=list()
+    if(len(matrix)==1 and len(matrix[0])==1):
+        adj_matrix=list(map(list,matrix))
+    else:
+        pre_adj_matrix=null(len(matrix),len(matrix[0]))
+        sign=-1
+        for i in range(0,len(matrix)):
+            for j in range(0,len(matrix[i])):
+                sub_matrix=list()
+                for k in range(0,len(matrix)):
+                    temp=list()
+                    for l in range(0,len(matrix[k])):
+                        if(k!=i and l!=j):
+                            temp.append(matrix[k][l])
+                    if(len(temp)!=0):
+                        sub_matrix.append(temp)
+                pre_adj_matrix[i][j]=(sign**(i+j))*determinant(sub_matrix)
+        adj_matrix=transpose(pre_adj_matrix)
+    return(adj_matrix)
+
