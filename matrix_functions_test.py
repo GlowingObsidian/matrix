@@ -24,6 +24,10 @@ matrix.draw(matrix.dot(matrix.fill(matrix.null(int(input('Number of Rows: ')),in
 #matrix.determinant(matrix)
 print(matrix.determinant(matrix.fill(matrix.null(int(input('Number of Rows: ')),int(input('Number of Columns: '))))))
 
+#Transpose of a Matrix
+#matrix.transpose(matrix)
+matrix.draw(matrix.transpose(matrix.fill(matrix.null(int(input('Number of Rows: ')),int(input('Number of Columns: '))))))
+
 #Adjoint of a Matrix
 #matrix.adjoint(matrix)
 matrix.draw(matrix.adjoint(matrix.fill(matrix.null(int(input('Number of Rows: ')),int(input('Number of Columns: '))))))
